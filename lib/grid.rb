@@ -12,7 +12,7 @@ class Grid
     ('A'..bottom_right[0]).to_a.each do |letter|
       board[letter] = Hash.new
       ('1'..bottom_right[1]).to_a.each do |num|
-        board[letter][letter+num] = Cell.new
+        board[letter][num] = Cell.new
       end
     end
   end
