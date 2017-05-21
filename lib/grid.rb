@@ -11,7 +11,7 @@ class Grid
   def board_setup(bottom_right)
     ('A'..bottom_right[0]).to_a.each do |letter|
       board[letter] = Hash.new
-      ('1'..bottom_right[1]).to_a.each do |num|
+      ('1'..bottom_right[1..2]).to_a.each do |num|
         board[letter][num] = Cell.new
       end
     end
