@@ -24,4 +24,18 @@ class Grid
       end
     end
   end
+
+  def space_occupied?(coord)
+    board[coord[0]][coord[1]].occupied
+  end
+
+  def place_ship_at(coord)
+    return nil if space_occupied?(coord)
+    space = board[coord[0]][coord[1]]
+    space.place_ship
+  end
+
+  def shoot_at(coord)
+    board[coord[0]][coord[1]].shoot_at
+  end
 end

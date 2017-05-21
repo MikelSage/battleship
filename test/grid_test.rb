@@ -44,6 +44,45 @@ class GridTest < Minitest::Test
     assert_equal expected, grid.layout_board
   end
 
+  def test_grid_knows_if_space_is_occupied
+    grid.board_setup('D4')
+
+    refute grid.space_occupied?('B3')
+
+    grid.board['B']['3'].place_ship
+
+    assert grid.space_occupied?('B3')
+  end
+
+  def test_can_place_ship_on_grid
+    grid.board_setup('D4')
+    grid.place_ship_at('D3')
+
+    refute grid.space_occupied?('B3')
+    assert grid.space_occupied?('D3')
+  end
+
+  def test_place_ship_returns_nil_if_space_occupied
+    grid.board_setup('D4')
+    grid.place_ship_at('D3')
+    assert grid.space_occupied?('D3')
+
+    assert_nil grid.place_ship_at('D3')
+  end
+
+  def test_can_shoot_at_coordinate
+    grid.board_setup('D4')
+    grid.place_ship_at('B3')
+    grid.place_ship_at('C4')
+    grid.shoot_at('B2')
+    grid.shoot_at('B3')
+    grid.shoot_at('C4')
+
+    assert_equal 'M', grid.board['B']['2'].status
+    assert_equal 'M', grid.board['B']['2'].status
+    assert_equal 'M', grid.board['B']['2'].status
+  end
+
   def test_can_display_a_miss
     grid.board_setup('D4')
     expected_raw = [[' ', ' ', ' ', ' '],
@@ -58,7 +97,7 @@ class GridTest < Minitest::Test
 
     assert_equal expected_raw, grid.layout_board
 
-    grid.board['C']['2'].shot_at
+    grid.shoot_at('C2')
 
     assert_equal expected_mod, grid.layout_board
   end
@@ -77,9 +116,9 @@ class GridTest < Minitest::Test
 
     assert_equal expected_raw, grid.layout_board
 
-    grid.board['B']['3'].place_ship
-    grid.board['B']['3'].shot_at
-    grid.board['B']['4'].shot_at
+    grid.place_ship_at('B3')
+    grid.shoot_at('B3')
+    grid.shoot_at('B4')
 
     assert_equal expected_mod, grid.layout_board
   end

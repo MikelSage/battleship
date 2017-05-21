@@ -9,7 +9,7 @@ class Cell
     @occupied = true
   end
 
-  def shot_at
+  def shoot_at
     @occupied ? @status = 'H' : @status = 'M'
   end
 end
