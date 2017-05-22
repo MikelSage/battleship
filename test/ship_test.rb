@@ -32,4 +32,12 @@ class ShipTest < Minitest::Test
 
     assert_equal expected, destroyer.coordinates
   end
+
+  def test_it_is_oriented_to_horizontal_by_default_and_can_be_changed
+    assert_equal 'horizontal', destroyer.orientation
+
+    destroyer.make_vertical
+
+    assert_equal 'vertical', destroyer.orientation
+  end
 end

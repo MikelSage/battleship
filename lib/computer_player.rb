@@ -2,6 +2,8 @@
 # needs to know about its own grid
 # needs to place ships
 # needs to shoot at random coordinates
+# creates ships as vertical/horizontal
+
 require_relative "ship"
 
 class ComputerPlayer
@@ -35,25 +37,9 @@ class ComputerPlayer
   end
 
   def place_ships
+    available_cells = own_grid.available_slots
     @ships.each do |name, ship|
-      current_letter = ('A'..'D').to_a.sample
-      current_num = rand(1..4)
-      current_coord = current_letter+current_num.to_s
-      ship.size.times do
-        binding.pry
-        if ship.coordinates.empty?
-          own_grid.place_ship_at(current_coord)
-          ship.coordinates << current_coord
-          current_coord = possible_next_placement(current_coord).sample
-        else
-          own_grid.place_ship_at(current_coord)
-          if current_coord[0] == ship.coordinates.first[0]
-            if current_coord[1] == '1'
-            current_coord = current_coord[0]+current_coord[1].next
-            end
-          end
-        end
-      end
+
     end
   end
 

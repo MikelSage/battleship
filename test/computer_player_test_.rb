@@ -66,7 +66,6 @@ class ComputerPlayerTest < Minitest::Test
                 [' ', ' ', ' ', ' '],
                 [' ', ' ', ' ', ' '],
                 [' ', ' ', ' ', ' ']]
-    # binding.pry
     cpu.place_ships
 
     assert_equal expected, cpu.own_grid.layout_board
