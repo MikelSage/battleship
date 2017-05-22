@@ -38,4 +38,13 @@ class Grid
   def shoot_at(coord)
     board[coord[0]][coord[1]].shoot_at
   end
+
+  def available_slots
+    slots = board.map do |row, value|
+      value.map do |key, value|
+        row+key
+      end
+    end
+    slots.flatten
+  end
 end

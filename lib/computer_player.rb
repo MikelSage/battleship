@@ -36,28 +36,30 @@ class ComputerPlayer
 
   def place_ships
     @ships.each do |name, ship|
-      first_letter = ('A'..'D').to_a.sample
-      first_num = rand(1..4)
-      next_coord = nil
-      ship.size.times do |time|
-        # binding.pry
-        if time > 0
-          own_grid.place_ship_at(next_coord)
-          # binding.pry
-          if first_letter == next_coord[0]
-            next_coord = first_letter+([first_num-1, first_num+1].sample.to_s) unless first_num == 1
-          else
-            next_coord = first_letter.next+first_num.to_s
-          end
+      current_letter = ('A'..'D').to_a.sample
+      current_num = rand(1..4)
+      current_coord = current_letter+current_num.to_s
+      ship.size.times do
+        binding.pry
+        if ship.coordinates.empty?
+          own_grid.place_ship_at(current_coord)
+          ship.coordinates << current_coord
+          current_coord = possible_next_placement(current_coord).sample
         else
-          own_grid.place_ship_at(first_letter+first_num.to_s)
-          next_coord = possible_next_placement(first_letter, first_num).sample
+          own_grid.place_ship_at(current_coord)
+          if current_coord[0] == ship.coordinates.first[0]
+            if current_coord[1] == '1'
+            current_coord = current_coord[0]+current_coord[1].next
+            end
+          end
         end
       end
     end
   end
 
-  def possible_next_placement(last_letter, last_num)
+  def possible_next_placement(current_coord)
+    last_letter = current_coord[0]
+    last_num = current_coord[1].to_i
     possile_letters = [(last_letter.ord - 1).chr, last_letter.next]
     possible_nums = [last_num - 1, last_num + 1]
 

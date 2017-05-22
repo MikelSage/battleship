@@ -55,7 +55,7 @@ class ComputerPlayerTest < Minitest::Test
 
   def test_possible_next_placement_returns_expected
     expected = ['A2', 'C2', 'B1', 'B3']
-    actual = cpu.possible_next_placement('B', 2)
+    actual = cpu.possible_next_placement('B2')
 
     assert_equal expected, actual
   end
