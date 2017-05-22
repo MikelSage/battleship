@@ -1,8 +1,10 @@
+
 require 'minitest/autorun'
 require "minitest/pride"
 require "pry"
 require_relative '../lib/computer_player'
 require_relative '../lib/grid'
+require_relative '../lib/ship'
 
 class ComputerPlayerTest < Minitest::Test
   attr_reader :cpu
@@ -61,7 +63,7 @@ class ComputerPlayerTest < Minitest::Test
   end
 
   def test_computer_can_place_ships
-
+    skip
     expected = [[' ', ' ', ' ', ' '],
                 [' ', ' ', ' ', ' '],
                 [' ', ' ', ' ', ' '],
@@ -69,5 +71,14 @@ class ComputerPlayerTest < Minitest::Test
     cpu.place_ships
 
     assert_equal expected, cpu.own_grid.layout_board
+  end
+
+  def test_can_change_ship_orientation
+    ship = Ship.new
+    expected = ['horizontal', 'vertical']
+
+    cpu.set_orientation(ship)
+
+    assert expected.include?(ship.orientation)
   end
 end

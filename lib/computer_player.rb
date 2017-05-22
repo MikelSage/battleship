@@ -39,7 +39,12 @@ class ComputerPlayer
   def place_ships
     available_cells = own_grid.available_slots
     @ships.each do |name, ship|
+      ship.set_orientation
+      if ship.orientation == 'vertical'
+        
+      else
 
+      end
     end
   end
 
@@ -55,5 +60,11 @@ class ComputerPlayer
      last_letter+possible_nums[0].to_s,
      last_letter+possible_nums[1].to_s
     ]
+  end
+
+  def set_orientation(ship)
+    possible_orientations = ['horizontal', 'vertical']
+
+    ship.orientation = possible_orientations.sample
   end
 end

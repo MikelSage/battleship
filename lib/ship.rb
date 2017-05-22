@@ -9,8 +9,4 @@ class Ship
   def add_coordinate(coord)
     coordinates << coord
   end
-
-  def make_vertical
-    @orientation = 'vertical'
-  end
 end
