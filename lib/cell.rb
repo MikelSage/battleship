@@ -7,6 +7,7 @@ class Cell
 
   def place_ship
     @occupied = true
+    @status = 'S'
   end
 
   def shoot_at
