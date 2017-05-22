@@ -22,4 +22,14 @@ class ShipTest < Minitest::Test
     assert_equal 4, battleship.size
     assert_equal 5, carrier.size
   end
+
+  def test_knows_its_coordinates
+    expected = ['A2', 'B2', 'C2']
+
+    destroyer.add_coordinate('A2')
+    destroyer.add_coordinate('B2')
+    destroyer.add_coordinate('C2')
+
+    assert_equal expected, destroyer.coordinates
+  end
 end
