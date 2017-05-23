@@ -83,4 +83,11 @@ class ComputerPlayer
       potential_coords << next_coord
     end
   end
+
+  def generate_head_horizontal(ship)
+    rows = own_grid.board.keys
+    rightmost_point = rows.length - ship.size + 1
+    column = rand(1..rightmost_point).to_s
+    rows.sample + column
+  end
 end

@@ -112,4 +112,29 @@ class ComputerPlayerTest < Minitest::Test
     cpu.potential_vertical_coordinates(destroyer, potential_coords)
     assert expected.include?(potential_coords)
   end
+
+  def test_can_generate_horizontal_head
+    frigate = Ship.new
+    destroyer = Ship.new(3)
+    expected_frigate = [
+      'A1', 'A2', 'A3',
+      'B1', 'B2', 'B3',
+      'C1', 'C2', 'C3',
+      'D1', 'D2', 'D3'
+    ]
+
+    expected_destroyer = [
+      'A1', 'A2', 'B1', 'B2',
+      'C1', 'C2', 'D1', 'D2'
+    ]
+
+    invalid_destroyer = [
+      'A3', 'A4', 'B3', 'B4',
+      'C3', 'C4', 'D3', 'D4'
+    ]
+
+    assert expected_frigate.include?(cpu.generate_head_horizontal(frigate))
+    assert expected_destroyer.include?(cpu.generate_head_horizontal(destroyer))
+    refute invalid_destroyer.include?(cpu.generate_head_horizontal(destroyer))
+  end
 end
