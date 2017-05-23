@@ -148,4 +148,44 @@ class ComputerPlayerTest < Minitest::Test
     cpu.potential_horizontal_coordinates(destroyer, potential_coords)
     assert expected.include?(potential_coords)
   end
+
+  def test_can_shoot_at_coordinate_on_player_grid
+    player_grid = Grid.new
+    player_grid.board_setup('D4')
+    expected = [[' ', ' ', ' ', ' '],
+                [' ', 'M', ' ', ' '],
+                [' ', 'M', ' ', ' '],
+                [' ', ' ', ' ', ' ']]
+
+    cpu.shoot_at(player_grid, 'C2')
+    cpu.shoot_at(player_grid, 'B2')
+
+    assert_equal expected, player_grid.layout_board
+  end
+
+  def test_shoots_randomly_at_uniq_spaces
+    player_grid = Grid.new
+    player_grid.board_setup('D4')
+
+    available_slots = player_grid.available_slots
+
+    cpu.shoot_randomly(player_grid, available_slots)
+    cpu.shoot_randomly(player_grid, available_slots)
+    cpu.shoot_randomly(player_grid, available_slots)
+    cpu.shoot_randomly(player_grid, available_slots)
+    cpu.shoot_randomly(player_grid, available_slots)
+    cpu.shoot_randomly(player_grid, available_slots)
+    cpu.shoot_randomly(player_grid, available_slots)
+    cpu.shoot_randomly(player_grid, available_slots)
+    cpu.shoot_randomly(player_grid, available_slots)
+    cpu.shoot_randomly(player_grid, available_slots)
+    cpu.shoot_randomly(player_grid, available_slots)
+    cpu.shoot_randomly(player_grid, available_slots)
+    cpu.shoot_randomly(player_grid, available_slots)
+    cpu.shoot_randomly(player_grid, available_slots)
+    cpu.shoot_randomly(player_grid, available_slots)
+    cpu.shoot_randomly(player_grid, available_slots)
+
+    assert cpu.shot_at.uniq.length == cpu.shot_at.length
+  end
 end

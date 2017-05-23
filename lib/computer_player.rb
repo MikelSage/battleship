@@ -7,13 +7,14 @@
 require_relative "ship"
 
 class ComputerPlayer
-  attr_reader :own_grid, :foe_grid, :lives, :ships
+  attr_reader :own_grid, :foe_grid, :lives, :ships, :shot_at
 
   def initialize(own_grid, foe_grid, lives=5)
     @own_grid = own_grid
     @foe_grid = foe_grid
     @lives = lives
     @ships = self.set_ships(lives)
+    @shot_at = []
   end
 
   def possible_ships
@@ -23,6 +24,10 @@ class ComputerPlayer
       'cruiser' => 4,
       'carrier' => 5
     }
+  end
+
+  def open_cells
+    own_grid.available_slots
   end
 
   def set_ships(lives)
@@ -112,5 +117,15 @@ class ComputerPlayer
     else
       place_horizontal_ship(ship, available_cells, occupied_cells)
     end
+  end
+
+  def shoot_at(player_grid, coord)
+    player_grid.shoot_at(coord)
+    shot_at << coord
+  end
+
+  def shoot_randomly(foe_grid, available_cells)
+    coord = available_cells.delete(available_cells.sample)
+    shoot_at(foe_grid, coord)
   end
 end
