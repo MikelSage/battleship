@@ -55,15 +55,12 @@ class ComputerPlayerTest < Minitest::Test
     assert_equal expected, actual
   end
 
-  def test_computer_can_place_ships
-    skip
-    expected = [[' ', ' ', ' ', ' '],
-                [' ', ' ', ' ', ' '],
-                [' ', ' ', ' ', ' '],
-                [' ', ' ', ' ', ' ']]
+  def test_computer_can_place_ships_not_overlapping
     cpu.place_ships
+    frigate_coords = cpu.ships['frigate'].coordinates
+    destroyer_coords = cpu.ships['destroyer'].coordinates
 
-    assert_equal expected, cpu.own_grid.layout_board
+    assert (frigate_coords & destroyer_coords).empty?
   end
 
   def test_can_change_ship_orientation
@@ -138,7 +135,7 @@ class ComputerPlayerTest < Minitest::Test
     refute invalid_destroyer.include?(cpu.generate_head_horizontal(destroyer))
   end
 
-  def test_can_generate_potential_vertical_placement
+  def test_can_generate_potential_horizontal_placement
     destroyer = Ship.new(3)
     expected = [
       ['A1', 'A2', 'A3'], ['A2', 'A3', 'A4'],

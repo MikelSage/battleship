@@ -57,11 +57,11 @@ class ComputerPlayer
     head = generate_head_vertical(ship)
     next_coord = nil
     potential_coords = [head]
-    generate_maybe_vertical(ship, maybe)
+    potential_vertical_coordinates(ship, potential_coords)
 
-    if (maybe & occupied_cells).empty?
-      maybe.each do |coord|
-        own_grid.place_ship_at(coord)
+    if (potential_coords & occupied_cells).empty?
+      potential_coords.each do |coord|
+        own_grid.place_ship_at(coord,ship)
         ship.coordinates << coord
         occupied_cells << available_cells.delete(coord)
       end
@@ -95,6 +95,22 @@ class ComputerPlayer
     (ship.size-1).times do
       next_coord = potential_coords[-1][0] + potential_coords[-1][1].next
       potential_coords << next_coord
+    end
+  end
+
+  def place_horizontal_ship(ship, available_cells, occupied_cells)
+    head = generate_head_horizontal(ship)
+    next_coord = nil
+    potential_coords = [head]
+    potential_horizontal_coordinates(ship, potential_coords)
+    if (potential_coords & occupied_cells).empty?
+      potential_coords.each do |coord|
+        own_grid.place_ship_at(coord, ship)
+        ship.coordinates << coord
+        occupied_cells << available_cells.delete(coord)
+      end
+    else
+      place_horizontal_ship(ship, available_cells, occupied_cells)
     end
   end
 end

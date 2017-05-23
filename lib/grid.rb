@@ -29,10 +29,10 @@ class Grid
     board[coord[0]][coord[1]].occupied
   end
 
-  def place_ship_at(coord)
+  def place_ship_at(coord, ship)
     return nil if space_occupied?(coord)
     space = board[coord[0]][coord[1]]
-    space.place_ship
+    space.place_ship(ship)
   end
 
   def shoot_at(coord)

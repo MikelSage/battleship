@@ -3,11 +3,12 @@ class Cell
   def initialize
     @occupied = false
     @status = ' '
+    @ship = nil
   end
 
-  def place_ship
+  def place_ship(ship)
     @occupied = true
-    @status = 'S'
+    @ship = ship
   end
 
   def shoot_at
