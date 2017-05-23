@@ -55,13 +55,6 @@ class ComputerPlayerTest < Minitest::Test
     assert_equal expected, actual
   end
 
-  def test_possible_next_placement_returns_expected
-    expected = ['A2', 'C2', 'B1', 'B3']
-    actual = cpu.possible_next_placement('B2')
-
-    assert_equal expected, actual
-  end
-
   def test_computer_can_place_ships
     skip
     expected = [[' ', ' ', ' ', ' '],
@@ -80,5 +73,29 @@ class ComputerPlayerTest < Minitest::Test
     cpu.set_orientation(ship)
 
     assert expected.include?(ship.orientation)
+  end
+
+  def test_can_generate_vertical_head
+    frigate = Ship.new
+    destroyer = Ship.new(3)
+    expected_frigate = [
+      'A1', 'A2', 'A3', 'A4',
+      'B1', 'B2', 'B3', 'B4',
+      'C1', 'C2', 'C3', 'C4'
+    ]
+
+    expected_destroyer = [
+      'A1', 'A2', 'A3', 'A4',
+      'B1', 'B2', 'B3', 'B4'
+    ]
+
+    invalid_destroyer = [
+      'C1', 'C2', 'C3', 'C4',
+      'D1', 'D2', 'D3', 'D4'
+    ]
+
+    assert expected_frigate.include?(cpu.generate_head_vertical(frigate))
+    assert expected_destroyer.include?(cpu.generate_head_vertical(destroyer))
+    refute invalid_destroyer.include?(cpu.generate_head_vertical(destroyer))
   end
 end

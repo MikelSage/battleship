@@ -38,33 +38,42 @@ class ComputerPlayer
 
   def place_ships
     available_cells = own_grid.available_slots
+    occupied_cells = []
     @ships.each do |name, ship|
-      ship.set_orientation
+      set_orientation(ship)
       if ship.orientation == 'vertical'
-        
+        place_vertical_ship(ship, available_cells, occupied_cells)
       else
-
+        place_horizontal_ship(ship, available_cells, occupied_cells)
       end
     end
   end
 
-  def possible_next_placement(current_coord)
-    last_letter = current_coord[0]
-    last_num = current_coord[1].to_i
-    possile_letters = [(last_letter.ord - 1).chr, last_letter.next]
-    possible_nums = [last_num - 1, last_num + 1]
-
-    [
-     possile_letters[0]+last_num.to_s,
-     possile_letters[1]+last_num.to_s,
-     last_letter+possible_nums[0].to_s,
-     last_letter+possible_nums[1].to_s
-    ]
+  def set_orientation(ship)
+    ship.orientation = ['horizontal', 'vertical'].sample
   end
 
-  def set_orientation(ship)
-    possible_orientations = ['horizontal', 'vertical']
+  def place_vertical_ship(ship, available_cells, occupied_cells)
+    head = generate_head_vertical(ship)
+    next_coord = nil
+    maybe = [head]
+    generate_maybe_vertical(ship, maybe)
 
-    ship.orientation = possible_orientations.sample
+    if (maybe & occupied_cells).empty?
+      maybe.each do |coord|
+        own_grid.place_ship_at(coord)
+        ship.coordinates << coord
+        occupied_cells << available_cells.delete(coord)
+      end
+    else
+      place_vertical_ship(ship, available_cells, occupied_cells)
+    end
+  end
+
+  def generate_head_vertical(ship)
+    rows = own_grid.board.keys
+    lowest_point = rows.length - ship.size + 1
+    possible_heads = rows.first(lowest_point)
+    possible_heads.sample + rand(1..rows.length).to_s
   end
 end
