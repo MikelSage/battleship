@@ -137,4 +137,18 @@ class ComputerPlayerTest < Minitest::Test
     assert expected_destroyer.include?(cpu.generate_head_horizontal(destroyer))
     refute invalid_destroyer.include?(cpu.generate_head_horizontal(destroyer))
   end
+
+  def test_can_generate_potential_vertical_placement
+    destroyer = Ship.new(3)
+    expected = [
+      ['A1', 'A2', 'A3'], ['A2', 'A3', 'A4'],
+      ['B1', 'B2', 'B3'], ['B2', 'B3', 'B4'],
+      ['C1', 'C2', 'C3'], ['C2', 'C3', 'C4'],
+      ['D1', 'D2', 'D3'], ['D2', 'D3', 'D4']
+    ]
+    head = cpu.generate_head_horizontal(destroyer)
+    potential_coords = [head]
+    cpu.potential_horizontal_coordinates(destroyer, potential_coords)
+    assert expected.include?(potential_coords)
+  end
 end

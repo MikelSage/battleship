@@ -90,4 +90,11 @@ class ComputerPlayer
     column = rand(1..rightmost_point).to_s
     rows.sample + column
   end
+
+  def potential_horizontal_coordinates(ship, potential_coords)
+    (ship.size-1).times do
+      next_coord = potential_coords[-1][0] + potential_coords[-1][1].next
+      potential_coords << next_coord
+    end
+  end
 end
