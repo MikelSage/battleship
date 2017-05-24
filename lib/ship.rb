@@ -13,8 +13,9 @@ class Ship
 
   def hit
     @coordinates.shift
-    if @coordinates.empty?
-      puts "You sunk a ship!"
-    end
+  end
+
+  def sunk?
+    @coordinates.empty?
   end
 end
