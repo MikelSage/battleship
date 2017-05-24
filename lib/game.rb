@@ -48,8 +48,19 @@ class Game
       "That space is already occupied."
     elsif invalid_coordinates?(coords, ship, player_grid)
       "The coordinates have to be in order."
-    # else
-    #   ''
+    end
+  end
+
+  def players_take_shots
+    while (computer.lives > 0 || player.lives > 0)
+      cpu_grid.print_results
+      player_grid.print_results
+
+      puts 'Pick a coordinate to shoot at: '
+      coordinate = gets.chomp.upcase
+
+      player.shoot_at(coordinate)
+      cpu.shoot_randomly(player_grid)
     end
   end
 end

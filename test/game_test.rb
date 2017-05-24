@@ -51,4 +51,15 @@ class GameTest < Minitest::Test
     assert_instance_of Ship, game.player_grid.board['A']['1'].ship
     assert_instance_of Ship, game.player_grid.board['A']['2'].ship
   end
+
+  def test_computer_can_place_ships
+    game.setup
+
+    game.computer_place_ships
+
+    frigate_coords = game.computer.ships['frigate'].coordinates
+    destroyer_coords = game.computer.ships['destroyer'].coordinates
+
+    assert (frigate_coords & destroyer_coords).empty?
+  end
 end
