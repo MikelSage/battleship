@@ -17,4 +17,14 @@ class Validator
       return true
     end
   end
+
+  def invalid_coordinates?(coordinates)
+    ((coordinates.length) - 1).times do |time|
+      coord = coordinates[time]
+      next_coord = coordinates[time + 1]
+      prev_coord = coordinates[time - 1]
+      return true unless valid_next_coordinate?(coord, next_coord, prev_coord)
+    end
+    return false
+  end
 end

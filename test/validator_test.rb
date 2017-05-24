@@ -28,4 +28,28 @@ class ValidatorTest < Minitest::Test
     refute validator.valid_next_coordinate?('B2', 'D2')
     refute validator.valid_next_coordinate?('B2', 'B3', 'A2')
   end
+
+  def test_it_knows_valid_coordinates
+    valid_frigate_coords = ['B2', 'C2']
+    valid_destroyer_coords = ['D1', 'D2', 'D3']
+
+    refute validator.invalid_coordinates?(valid_frigate_coords)
+    refute validator.invalid_coordinates?(valid_destroyer_coords)
+  end
+
+  def test_it_knows_invalid_coordinates
+    invalid_frigate_coords = ['B2', 'D2']
+    invalid_destroyer_coords = ['D1', 'D2', 'D4']
+    horizontal_l = ['D1', 'D2', 'C2']
+    vertical_l = ['A1', 'B1', 'B2']
+    vertical_l_four = ['A1', 'B1', 'C1', 'C3']
+    weird_vertical = ['A1', 'B1', 'C2', 'D4']
+
+    assert validator.invalid_coordinates?(invalid_frigate_coords)
+    assert validator.invalid_coordinates?(invalid_destroyer_coords)
+    assert validator.invalid_coordinates?(horizontal_l)
+    assert validator.invalid_coordinates?(vertical_l)
+    assert validator.invalid_coordinates?(vertical_l_four)
+    assert validator.invalid_coordinates?(weird_vertical)
+  end
 end
