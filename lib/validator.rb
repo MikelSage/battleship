@@ -18,12 +18,14 @@ module Validator
     end
   end
 
-  def invalid_coordinates?(coordinates)
+  def invalid_coordinates?(coordinates, ship, grid)
+    return true if coordinates.length < ship.size
     ((coordinates.length) - 1).times do |time|
       coord = coordinates[time]
       next_coord = coordinates[time + 1]
       prev_coord = coordinates[time - 1]
       return true unless valid_next_coordinate?(coord, next_coord, prev_coord)
+      return true if grid.space_occupied?(coordinates[time])
     end
     return false
   end

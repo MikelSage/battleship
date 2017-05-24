@@ -10,4 +10,11 @@ class Ship
   def add_coordinate(coord)
     coordinates << coord
   end
+
+  def hit
+    @coordinates.shift
+    if @coordinates.empty?
+      puts "You sunk a ship!"
+    end
+  end
 end

@@ -13,5 +13,6 @@ class Cell
 
   def shoot_at
     @occupied ? @status = 'H' : @status = 'M'
+    @ship.hit if @ship
   end
 end
