@@ -1,3 +1,4 @@
+require "pry"
 module Validator
   def within_one?(char1, char2)
     (char1.ord - char2.ord).abs == 1 unless char1.nil?
@@ -19,14 +20,22 @@ module Validator
   end
 
   def invalid_coordinates?(coordinates, ship, grid)
-    return true if coordinates.length < ship.size
+    return true if coordinates.length != ship.size
     ((coordinates.length) - 1).times do |time|
       coord = coordinates[time]
       next_coord = coordinates[time + 1]
       prev_coord = coordinates[time - 1]
       return true unless valid_next_coordinate?(coord, next_coord, prev_coord)
-      return true if grid.space_occupied?(coordinates[time])
+      return true if already_occupied?(grid, coordinates[time])
     end
     return false
+  end
+
+  def already_occupied?(grid, coord)
+    grid.space_occupied?(coord)
+  end
+
+  def any_occupied?(grid, coords)
+    coords.any? { |coord| grid.space_occupied?(coord) }
   end
 end

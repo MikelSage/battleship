@@ -13,9 +13,16 @@ class GameTest < Minitest::Test
   end
 
   def test_it_can_setup_game
+    expected = [[' ', ' ', ' ', ' '],
+                [' ', ' ', ' ', ' '],
+                [' ', ' ', ' ', ' '],
+                [' ', ' ', ' ', ' ']]
+
     game.setup
 
     assert_instance_of Player, game.player
     assert_instance_of ComputerPlayer, game.computer
+    assert_equal expected, game.player_grid.layout_board
+    assert_equal expected, game.computer_grid.layout_board
   end
 end
