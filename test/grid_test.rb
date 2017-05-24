@@ -135,4 +135,10 @@ class GridTest < Minitest::Test
 
     assert_equal expected, grid.available_slots
   end
+
+  def test_can_print_results
+    grid.board_setup('D4')
+
+    grid.print_results
+  end
 end

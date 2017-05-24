@@ -47,4 +47,17 @@ class Grid
     end
     slots.flatten
   end
+
+  def print_results
+    board_layout = layout_board
+    column_label = board.keys
+    row_label = (1..column_label.length).to_a
+    seperator = '=' * (column_label.length * 2 + 4)
+    puts seperator
+    puts '. ' + row_label.join(' ')
+    board_layout.each_with_index do |row, index|
+      puts column_label[index] + " " + row.join(" ")
+    end
+    puts seperator
+  end
 end
