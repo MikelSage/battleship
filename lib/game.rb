@@ -20,6 +20,10 @@ class Game
     @computer = ComputerPlayer.new(computer_grid, player_grid)
   end
 
+  def computer_place_ships
+    computer.place_ships
+  end
+
   def player_place_ship
     player.ships.each do |ship_name, ship|
       puts "Place your #{ship_name}, it is #{ship.size} units long"
@@ -44,8 +48,8 @@ class Game
       "That space is already occupied."
     elsif invalid_coordinates?(coords, ship, player_grid)
       "The coordinates have to be in order."
-    else
-      ''
+    # else
+    #   ''
     end
   end
 end

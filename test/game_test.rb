@@ -42,4 +42,13 @@ class GameTest < Minitest::Test
     assert_equal "That space is already occupied.", game.coordinate_error(occupied, ship, grid )
     assert_equal "The coordinates have to be in order.", game.coordinate_error(invalid, ship, grid )
   end
+
+  def test_player_can_place_ships
+    game.setup
+
+    game.player_place_ship
+
+    assert_instance_of Ship, game.player_grid.board['A']['1'].ship
+    assert_instance_of Ship, game.player_grid.board['A']['2'].ship
+  end
 end
