@@ -188,22 +188,22 @@ class ComputerPlayerTest < Minitest::Test
 
     available_slots = player_grid.available_slots
 
-    cpu.shoot_randomly(player_grid, available_slots)
-    cpu.shoot_randomly(player_grid, available_slots)
-    cpu.shoot_randomly(player_grid, available_slots)
-    cpu.shoot_randomly(player_grid, available_slots)
-    cpu.shoot_randomly(player_grid, available_slots)
-    cpu.shoot_randomly(player_grid, available_slots)
-    cpu.shoot_randomly(player_grid, available_slots)
-    cpu.shoot_randomly(player_grid, available_slots)
-    cpu.shoot_randomly(player_grid, available_slots)
-    cpu.shoot_randomly(player_grid, available_slots)
-    cpu.shoot_randomly(player_grid, available_slots)
-    cpu.shoot_randomly(player_grid, available_slots)
-    cpu.shoot_randomly(player_grid, available_slots)
-    cpu.shoot_randomly(player_grid, available_slots)
-    cpu.shoot_randomly(player_grid, available_slots)
-    cpu.shoot_randomly(player_grid, available_slots)
+    cpu.shoot_randomly(player_grid)
+    cpu.shoot_randomly(player_grid)
+    cpu.shoot_randomly(player_grid)
+    cpu.shoot_randomly(player_grid)
+    cpu.shoot_randomly(player_grid)
+    cpu.shoot_randomly(player_grid)
+    cpu.shoot_randomly(player_grid)
+    cpu.shoot_randomly(player_grid)
+    cpu.shoot_randomly(player_grid)
+    cpu.shoot_randomly(player_grid)
+    cpu.shoot_randomly(player_grid)
+    cpu.shoot_randomly(player_grid)
+    cpu.shoot_randomly(player_grid)
+    cpu.shoot_randomly(player_grid)
+    cpu.shoot_randomly(player_grid)
+    cpu.shoot_randomly(player_grid)
 
     assert cpu.shot_at.uniq.length == cpu.shot_at.length
   end

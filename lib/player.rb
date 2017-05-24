@@ -12,6 +12,7 @@ class Player
     @foe_grid = foe_grid
     @lives = lives
     @ships = self.set_ships(lives)
+    @shot_at = []
   end
 
   def possible_ships
@@ -39,5 +40,10 @@ class Player
       own_grid.place_ship_at(coord, ship)
       ship.coordinates << coord
     end
+  end
+
+  def shoot_at(coord)
+    foe_grid.shoot_at(coord)
+    shot_at << coord
   end
 end

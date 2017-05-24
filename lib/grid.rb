@@ -40,8 +40,8 @@ class Grid
   end
 
   def available_slots
-    slots = board.map do |row, value|
-      value.map do |key, value|
+    slots = board.map do |row, column|
+      column.map do |key, value|
         row+key
       end
     end

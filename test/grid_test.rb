@@ -1,12 +1,14 @@
 require "minitest/autorun"
 require "minitest/pride"
 require_relative "../lib/grid"
+require_relative "../lib/ship"
 require "pry"
 
 class GridTest < Minitest::Test
-  attr_reader :grid
+  attr_reader :grid, :frigate
   def setup
     @grid = Grid.new
+    @frigate = Ship.new
   end
 
   def test_grid_exists_and_board_is_empty_by_default
@@ -49,14 +51,14 @@ class GridTest < Minitest::Test
 
     refute grid.space_occupied?('B3')
 
-    grid.board['B']['3'].place_ship
+    grid.board['B']['3'].place_ship(frigate)
 
     assert grid.space_occupied?('B3')
   end
 
   def test_can_place_ship_on_grid
     grid.board_setup('D4')
-    grid.place_ship_at('D3')
+    grid.place_ship_at('D3', frigate)
 
     refute grid.space_occupied?('B3')
     assert grid.space_occupied?('D3')
@@ -64,16 +66,16 @@ class GridTest < Minitest::Test
 
   def test_place_ship_returns_nil_if_space_occupied
     grid.board_setup('D4')
-    grid.place_ship_at('D3')
+    grid.place_ship_at('D3', frigate)
     assert grid.space_occupied?('D3')
 
-    assert_nil grid.place_ship_at('D3')
+    assert_nil grid.place_ship_at('D3', frigate)
   end
 
   def test_can_shoot_at_coordinate
     grid.board_setup('D4')
-    grid.place_ship_at('B3')
-    grid.place_ship_at('C4')
+    grid.place_ship_at('B3', frigate)
+    grid.place_ship_at('C4', frigate)
     grid.shoot_at('B2')
     grid.shoot_at('B3')
     grid.shoot_at('C4')
@@ -116,7 +118,7 @@ class GridTest < Minitest::Test
 
     assert_equal expected_raw, grid.layout_board
 
-    grid.place_ship_at('B3')
+    grid.place_ship_at('B3', frigate)
     grid.shoot_at('B3')
     grid.shoot_at('B4')
 

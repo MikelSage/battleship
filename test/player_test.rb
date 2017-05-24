@@ -1,14 +1,15 @@
 require "minitest/autorun"
 require "minitest/pride"
-require_relative "../lib/player"
+require_relative '../lib/player'
+require_relative '../lib/computer_player'
 require_relative '../lib/grid'
 require_relative '../lib/ship'
 
 class PlayerTest < Minitest::Test
-  attr_reader :player
+  attr_reader :player, :cpu_grid, :player_grid
   def setup
-    cpu_grid = Grid.new
-    player_grid = Grid.new
+    @cpu_grid = Grid.new
+    @player_grid = Grid.new
     player_grid.board_setup('D4')
     @player = Player.new(player_grid, cpu_grid)
   end
@@ -52,5 +53,21 @@ class PlayerTest < Minitest::Test
     assert_instance_of Ship, board['A']['1'].ship
     assert_instance_of Ship, board['A']['2'].ship
     assert_nil board['B']['3'].ship
+  end
+
+  def test_player_can_shoot_at_enemy_ships
+    frigate = Ship.new
+    cpu_grid.board_setup('D4')
+    cpu_grid.place_ship_at('B3', frigate)
+    cpu_grid.place_ship_at('B4', frigate)
+    expected = [[' ', ' ', ' ', ' '],
+                [' ', ' ', 'H', ' '],
+                [' ', ' ', 'M', ' '],
+                [' ', ' ', ' ', ' ']]
+
+    player.shoot_at('B3')
+    player.shoot_at('C3')
+
+    assert_equal expected, cpu_grid.layout_board
   end
 end

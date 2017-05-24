@@ -124,8 +124,9 @@ class ComputerPlayer
     shot_at << coord
   end
 
-  def shoot_randomly(foe_grid, available_cells)
-    coord = available_cells.delete(available_cells.sample)
+  def shoot_randomly(foe_grid)
+    available_cells = foe_grid.available_slots
+    coord = (available_cells - shot_at).sample
     shoot_at(foe_grid, coord)
   end
 end
