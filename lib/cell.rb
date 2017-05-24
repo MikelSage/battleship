@@ -1,5 +1,5 @@
 class Cell
-  attr_reader :occupied, :status
+  attr_reader :occupied, :status, :ship
   def initialize
     @occupied = false
     @status = ' '
@@ -9,6 +9,7 @@ class Cell
   def place_ship(ship)
     @occupied = true
     @ship = ship
+    @status = 'S'
   end
 
   def shoot_at

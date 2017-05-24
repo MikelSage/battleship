@@ -9,10 +9,11 @@ class PlayerTest < Minitest::Test
   def setup
     cpu_grid = Grid.new
     player_grid = Grid.new
+    player_grid.board_setup('D4')
     @player = Player.new(player_grid, cpu_grid)
   end
 
-  def test_it_exists_and_knows_its_possible_ships
+  def test_it_exists_knows_its_possible_ships_and_has_5_lives_by_default
     expected = {
       'frigate' => 2,
       'destroyer' => 3,
@@ -22,5 +23,34 @@ class PlayerTest < Minitest::Test
 
     assert_instance_of Player, player
     assert_equal expected, player.possible_ships
+    assert_equal 5, player.lives
+  end
+
+  def test_set_ships_gives_correct_results
+    expected = ['frigate', 'destroyer']
+    actual = player.set_ships(5).keys
+
+    assert_equal expected, actual
+    assert_instance_of Ship, player.set_ships(5)['frigate']
+  end
+
+  def test_can_initialize_with_more_lives_and_ships
+    cpu_grid = Grid.new
+    player_grid = Grid.new
+    hard_player = Player.new(player_grid, cpu_grid, 14)
+    expected = ['frigate', 'destroyer', 'cruiser', 'carrier']
+    actual = hard_player.ships.keys
+
+    assert_equal 14, hard_player.lives
+    assert_equal expected, actual
+  end
+
+  def test_player_can_place_ships
+    player.place_ship(['A1', 'A2'], player.ships['frigate'])
+    board = player.own_grid.board
+
+    assert_instance_of Ship, board['A']['1'].ship
+    assert_instance_of Ship, board['A']['2'].ship
+    assert_nil board['B']['3'].ship
   end
 end

@@ -84,7 +84,7 @@ class ComputerPlayer
 
   def potential_vertical_coordinates(ship, potential_coords)
     (ship.size-1).times do
-      next_coord = potential_coords[-1][0].next + potential_coords[-1][1]
+      next_coord = potential_coords[-1][0].next + potential_coords[-1][1..2]
       potential_coords << next_coord
     end
   end
@@ -98,7 +98,7 @@ class ComputerPlayer
 
   def potential_horizontal_coordinates(ship, potential_coords)
     (ship.size-1).times do
-      next_coord = potential_coords[-1][0] + potential_coords[-1][1].next
+      next_coord = potential_coords[-1][0] + potential_coords[-1][1..2].next
       potential_coords << next_coord
     end
   end

@@ -63,6 +63,25 @@ class ComputerPlayerTest < Minitest::Test
     assert (frigate_coords & destroyer_coords).empty?
   end
 
+  def test_computer_can_place_more_ships_not_overlapping
+    cpu_grid = Grid.new
+    player_grid = Grid.new
+    hard_cpu = ComputerPlayer.new(cpu_grid, player_grid, 14)
+    cpu_grid.board_setup('L12')
+    hard_cpu.place_ships
+    frigate_coords = hard_cpu.ships['frigate'].coordinates
+    destroyer_coords = hard_cpu.ships['destroyer'].coordinates
+    cruiser_coords = hard_cpu.ships['cruiser'].coordinates
+    carrier_coords = hard_cpu.ships['carrier'].coordinates
+    assert (frigate_coords & destroyer_coords).empty?
+    assert (frigate_coords & cruiser_coords).empty?
+    assert (frigate_coords & carrier_coords).empty?
+    assert (destroyer_coords & cruiser_coords).empty?
+    assert (destroyer_coords & carrier_coords).empty?
+    assert (cruiser_coords & carrier_coords).empty?
+
+  end
+
   def test_can_change_ship_orientation
     ship = Ship.new
     expected = ['horizontal', 'vertical']
