@@ -25,21 +25,27 @@ class Game
       puts "Place your #{ship_name}, it is #{ship.size} units long"
       coords = gets.chomp.upcase.split
       while invalid_coordinates?(coords, ship, player_grid)
-        if coords.length < ship.size
-          puts 'The ship is longer, yo.'
-        elsif coords.length > ship.size
-          puts "That's too many coordinates, yo."
-        elsif any_occupied?(player_grid, coords)
-          puts "That space is already occupied."
-        else
-          puts "The coordinates have to be in order."
-        end
+        puts coordinate_error(coords, ship, player_grid)
         coords = gets.chomp.upcase.split
       end
 
       coords.each do |coord|
         player_grid.place_ship_at(coord, ship)
       end
+    end
+  end
+
+  def coordinate_error(coords, ship, grid)
+    if coords.length < ship.size
+      'The ship is longer, yo.'
+    elsif coords.length > ship.size
+      "That's too many coordinates, yo."
+    elsif any_occupied?(grid, coords)
+      "That space is already occupied."
+    elsif invalid_coordinates?(coords, ship, player_grid)
+      "The coordinates have to be in order."
+    else
+      ''
     end
   end
 end

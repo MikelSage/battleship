@@ -25,4 +25,21 @@ class GameTest < Minitest::Test
     assert_equal expected, game.player_grid.layout_board
     assert_equal expected, game.computer_grid.layout_board
   end
+
+  def test_coordinate_error_returns_correct_message
+    too_short = ['A1']
+    too_long = ['A1', 'A2', 'A3']
+    occupied = ['A1', 'B1']
+    invalid = ['A1', 'B2']
+
+    game.setup
+    ship = game.player.ships['frigate']
+    grid = game.player_grid
+    grid.place_ship_at('B1', ship)
+
+    assert_equal 'The ship is longer, yo.', game.coordinate_error(too_short, ship, grid )
+    assert_equal "That's too many coordinates, yo.", game.coordinate_error(too_long, ship, grid )
+    assert_equal "That space is already occupied.", game.coordinate_error(occupied, ship, grid )
+    assert_equal "The coordinates have to be in order.", game.coordinate_error(invalid, ship, grid )
+  end
 end
