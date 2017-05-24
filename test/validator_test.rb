@@ -19,4 +19,13 @@ class ValidatorTest < Minitest::Test
     refute validator.within_one?('A', 'C')
     refute validator.within_one?('1', '3')
   end
+
+  def test_know_if_next_coordinate_is_valid
+    assert validator.valid_next_coordinate?('A1', 'A2')
+    assert validator.valid_next_coordinate?('B2', 'C2')
+    assert validator.valid_next_coordinate?('B2', 'C2', 'A2')
+    refute validator.valid_next_coordinate?('A1', 'A4')
+    refute validator.valid_next_coordinate?('B2', 'D2')
+    refute validator.valid_next_coordinate?('B2', 'B3', 'A2')
+  end
 end
