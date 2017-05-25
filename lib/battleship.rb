@@ -2,7 +2,6 @@ require_relative 'game'
 require_relative 'messages'
 
 include Messages
-# game = Game.new
 
 puts welcome
 

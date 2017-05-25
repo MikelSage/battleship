@@ -3,7 +3,6 @@ require_relative 'computer_player'
 require_relative 'grid'
 require_relative 'validator'
 require_relative 'messages'
-require "pry"
 
 class Game
   include Validator, Messages
