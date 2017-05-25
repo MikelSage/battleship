@@ -62,6 +62,17 @@ class Game
 
       player.shoot_at(coordinate)
       computer.shoot_randomly(player_grid)
+      ships_sunk_this_round
+    end
+  end
+
+  def ships_sunk_this_round
+    player.ships.each do |ship_name, ship|
+      puts "The computer sunk your #{ship_name}!" if ship.sunk?
+    end
+
+    computer.ships.each do |ship_name, ship|
+      puts "You sunk the enemy's #{ship_name}!" if ship.sunk?
     end
   end
 end

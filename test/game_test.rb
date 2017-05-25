@@ -44,6 +44,7 @@ class GameTest < Minitest::Test
   end
 
   def test_player_can_place_ships
+    skip
     game.setup
 
     game.player_place_ship

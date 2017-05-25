@@ -7,7 +7,12 @@
 require_relative "ship"
 
 class ComputerPlayer
-  attr_reader :own_grid, :foe_grid, :lives, :ships, :shot_at
+  attr_reader :own_grid,
+              :foe_grid,
+              :lives,
+              :ships,
+              :shot_at,
+              :occupied_cells
 
   def initialize(own_grid, foe_grid, lives=5)
     @own_grid = own_grid
@@ -15,6 +20,7 @@ class ComputerPlayer
     @lives = lives
     @ships = self.set_ships(lives)
     @shot_at = []
+    @occupied_cells = []
   end
 
   def possible_ships
@@ -43,7 +49,6 @@ class ComputerPlayer
 
   def place_ships
     available_cells = own_grid.available_slots
-    occupied_cells = []
     @ships.each do |name, ship|
       set_orientation(ship)
       if ship.orientation == 'vertical'
