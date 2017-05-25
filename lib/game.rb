@@ -18,6 +18,7 @@ class Game
     @player_grid = Grid.new
     @computer_grid = Grid.new
     @start_time = nil
+    @shots_fired = 0
   end
 
   def setup
@@ -71,6 +72,7 @@ class Game
       coordinate = gets.chomp.upcase
 
       player.shoot_at(coordinate)
+      @shots_fired += 1
       computer.shoot_randomly(player_grid)
 
       puts ''
@@ -108,5 +110,14 @@ class Game
   def endgame_stats
     puts time_taken
     puts shots_fired
+  end
+
+  def time_taken
+    endgame_time = Time.now
+    endgame_time - time_taken
+  end
+
+  def shots_fired
+    @shots_fired
   end
 end
