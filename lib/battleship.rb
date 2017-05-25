@@ -8,6 +8,7 @@ puts welcome
 
 while true
   puts opening_prompt
+  puts divider
   answer = gets.chomp.downcase
 
   if answer == 'p'
@@ -32,11 +33,15 @@ game.setup
 
 game.computer_place_ships
 
+puts divider
 puts computer_placed_ships
+puts divider
 
 game.player_place_ship
 
+puts divider
 puts begin_message
+puts divider
 
 game.players_take_shots
 

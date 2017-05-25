@@ -28,7 +28,7 @@ module Messages
   end
 
   def divider
-    '=' * 10
+    '=' * 12
   end
 
   def computer_placed_ships

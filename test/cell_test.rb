@@ -1,11 +1,13 @@
 require "minitest/autorun"
 require "minitest/pride"
 require_relative "../lib/cell"
+require_relative "../lib/ship"
 
 class CellTest < Minitest::Test
-  attr_reader :cell
+  attr_reader :cell, :ship
   def setup
     @cell = Cell.new
+    @ship = Ship.new
   end
 
   def test_cell_exists_and_is_unoccupied_by_default
@@ -14,23 +16,23 @@ class CellTest < Minitest::Test
   end
 
   def test_cell_can_become_occupied
-    cell.place_ship
+    cell.place_ship(ship)
     assert cell.occupied
   end
 
-  def test_status_is_empty_string_by_default
-    assert_equal '', cell.status
+  def test_status_is_space_by_default
+    assert_equal ' ', cell.status
   end
 
   def test_knows_when_shot_was_a_miss
-    cell.shot_at
+    cell.shoot_at('A4')
     assert_equal 'M', cell.status
   end
 
   def test_know_when_shot_is_a_hit
-    cell.place_ship
-    cell.shot_at
-    
+    cell.place_ship(ship)
+    cell.shoot_at('A4')
+
     assert_equal 'H', cell.status
   end
 end

@@ -14,7 +14,7 @@ class PlayerTest < Minitest::Test
     @player = Player.new(player_grid, cpu_grid)
   end
 
-  def test_it_exists_knows_its_possible_ships_and_has_5_lives_by_default
+  def test_it_exists_knows_its_possible_ships_and_has_5_fleet_size_by_default
     expected = {
       'frigate' => 2,
       'destroyer' => 3,
@@ -24,7 +24,7 @@ class PlayerTest < Minitest::Test
 
     assert_instance_of Player, player
     assert_equal expected, player.possible_ships
-    assert_equal 5, player.lives
+    assert_equal 5, player.fleet_size
   end
 
   def test_set_ships_gives_correct_results
@@ -35,14 +35,14 @@ class PlayerTest < Minitest::Test
     assert_instance_of Ship, player.set_ships(5)['frigate']
   end
 
-  def test_can_initialize_with_more_lives_and_ships
+  def test_can_initialize_with_more_fleet_size_and_ships
     cpu_grid = Grid.new
     player_grid = Grid.new
     hard_player = Player.new(player_grid, cpu_grid, 14)
     expected = ['frigate', 'destroyer', 'cruiser', 'carrier']
     actual = hard_player.ships.keys
 
-    assert_equal 14, hard_player.lives
+    assert_equal 14, hard_player.fleet_size
     assert_equal expected, actual
   end
 

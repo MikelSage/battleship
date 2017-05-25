@@ -2,10 +2,11 @@ require_relative 'player'
 require_relative 'computer_player'
 require_relative 'grid'
 require_relative 'validator'
+require_relative 'messages'
 require "pry"
 
 class Game
-  include Validator
+  include Validator, Messages
   attr_reader :player,
               :computer,
               :player_grid,
@@ -13,10 +14,10 @@ class Game
               :start_time
 
   def initialize
-    @player = nil
-    @computer = nil
     @player_grid = Grid.new
     @computer_grid = Grid.new
+    @player = Player.new(player_grid, computer_grid)
+    @computer = ComputerPlayer.new(computer_grid, player_grid)
     @start_time = nil
     @shots_fired = 0
   end
@@ -24,8 +25,6 @@ class Game
   def setup
     player_grid.board_setup('D4')
     computer_grid.board_setup('D4')
-    @player = Player.new(player_grid, computer_grid)
-    @computer = ComputerPlayer.new(computer_grid, player_grid)
   end
 
   def computer_place_ships
@@ -76,11 +75,11 @@ class Game
       end
 
       player.shoot_at(coordinate)
-      @shots_fired += 1
       computer.shoot_randomly(player_grid)
+      @shots_fired += 1
 
       puts ''
-      puts ''
+      puts divider
     end
     ships_sunk_this_round(ships_sunk)
   end
@@ -112,7 +111,7 @@ class Game
   end
 
   def endgame_stats
-    puts "You took #{time_taken} seconds to vanquish your ene."
+    puts "You took #{time_taken.round(2)} seconds to vanquish your enemy."
     puts "Your logistics officer laments the use of #{shots_fired} shells to win."
   end
 

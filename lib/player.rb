@@ -1,15 +1,15 @@
 class Player
   attr_reader :own_grid,
               :foe_grid,
-              :lives,
+              :fleet_size,
               :ships,
               :shot_at
 
-  def initialize(own_grid, foe_grid, lives=5)
+  def initialize(own_grid, foe_grid, fleet_size=5)
     @own_grid = own_grid
     @foe_grid = foe_grid
-    @lives = lives
-    @ships = self.set_ships(lives)
+    @fleet_size = fleet_size
+    @ships = self.set_ships(fleet_size)
     @shot_at = []
   end
 
@@ -22,11 +22,11 @@ class Player
     }
   end
 
-  def set_ships(lives)
+  def set_ships(fleet_size)
     actual_ships = {}
     possible_ships.each do |ship_name, size|
-      if size <= lives
-        lives -= size
+      if size <= fleet_size
+        fleet_size -= size
         actual_ships[ship_name] = Ship.new(size)
       end
     end
