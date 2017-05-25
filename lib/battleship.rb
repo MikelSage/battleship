@@ -2,7 +2,7 @@ require_relative 'game'
 require_relative 'messages'
 
 include Messages
-game = Game.new
+# game = Game.new
 
 puts welcome
 
@@ -29,7 +29,30 @@ while true
   end
 end
 
-game.setup
+while true
+  puts difficulty_message
+  puts divider
+  answer = gets.chomp.downcase
+
+  if answer == "b"
+    game = Game.new(5)
+    game.setup('D4')
+    break
+  elsif answer == 'i'
+    game = Game.new(9)
+    game.setup('H8')
+    break
+  elsif answer == 'h'
+    game = Game.new(14)
+    game.setup('L12')
+    break
+  else
+    puts invalid_selection
+  end
+end
+
+
+# game.setup
 
 game.computer_place_ships
 

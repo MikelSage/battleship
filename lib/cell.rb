@@ -12,11 +12,15 @@ class Cell
   end
 
   def shoot_at(coord)
-    if @ship
+    if @occupied && coord[1..2].to_i >9
+      @status = ' H'
+    elsif !@occupied && coord[1..2].to_i > 9
+      @status = ' M'
+    elsif @occupied
       @status = 'H'
-      @ship.hit(coord)
     else
       @status = 'M'
     end
+    @ship.hit(coord) if @ship
   end
 end

@@ -52,4 +52,8 @@ module Messages
   def computer_win_message
     "Hah! You must have been trying to lose! Such madness."
   end
+
+  def difficulty_message
+    "Choose your difficulty! (B)eginner, (I)ntermediate, (H)ard."
+  end
 end

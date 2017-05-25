@@ -13,18 +13,18 @@ class Game
               :computer_grid,
               :start_time
 
-  def initialize
+  def initialize(fleet_size)
     @player_grid = Grid.new
     @computer_grid = Grid.new
-    @player = Player.new(player_grid, computer_grid)
-    @computer = ComputerPlayer.new(computer_grid, player_grid)
+    @player = Player.new(player_grid, computer_grid, fleet_size)
+    @computer = ComputerPlayer.new(computer_grid, player_grid, fleet_size)
     @start_time = nil
     @shots_fired = 0
   end
 
-  def setup
-    player_grid.board_setup('D4')
-    computer_grid.board_setup('D4')
+  def setup(lower_right)
+    player_grid.board_setup(lower_right)
+    computer_grid.board_setup(lower_right)
   end
 
   def computer_place_ships
