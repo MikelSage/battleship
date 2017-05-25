@@ -33,10 +33,10 @@ class Game
   def player_place_ship
     player.ships.each do |ship_name, ship|
       puts "Place your #{ship_name}, it is #{ship.size} units long"
-      coords = gets.chomp.upcase.split
+      coords = gets.chomp.upcase.strip.split
       while invalid_coordinates?(coords, ship, player_grid)
         puts coordinate_error(coords, ship, player_grid)
-        coords = gets.chomp.upcase.split
+        coords = gets.chomp.upcase.strip.split
       end
 
       player.place_ship(coords, ship)
@@ -44,6 +44,7 @@ class Game
   end
 
   def coordinate_error(coords, ship, grid)
+    available_cells = player_grid.available_slots
     if invalid_format?(coords)
       "That's not a valid format, dude"
     elsif coords.length < ship.size
@@ -67,10 +68,10 @@ class Game
       ships_sunk_this_round(ships_sunk)
 
       puts 'Pick a coordinate to shoot at: '
-      coordinate = gets.chomp.upcase
+      coordinate = gets.chomp.upcase.strip
       while invalid_format?(coordinate.split)
         puts "Invalid format, please choose again"
-        coordinate = gets.chomp.upcase
+        coordinate = gets.chomp.upcase.strip
       end
 
       player.shoot_at(coordinate)

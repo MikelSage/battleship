@@ -1,5 +1,5 @@
 require_relative "cell"
-
+require "pry"
 class Grid
   attr_reader :board,
               :occupied_cells
