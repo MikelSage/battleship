@@ -6,12 +6,18 @@ require "pry"
 
 class Game
   include Validator
-  attr_reader :player, :computer, :player_grid, :computer_grid
+  attr_reader :player,
+              :computer,
+              :player_grid,
+              :computer_grid,
+              :start_time
+
   def initialize
     @player = nil
     @computer = nil
     @player_grid = Grid.new
     @computer_grid = Grid.new
+    @start_time = nil
   end
 
   def setup
@@ -54,6 +60,7 @@ class Game
 
   def players_take_shots
     ships_sunk = {}
+    start_time = Time.now
     until (computer_grid.occupied_cells.length == 0 || player_grid.occupied_cells.length == 0)
       computer_grid.print_results
       puts ''
@@ -96,5 +103,10 @@ class Game
     else
       computer
     end
+  end
+
+  def endgame_stats
+    puts time_taken
+    puts shots_fired
   end
 end
