@@ -35,4 +35,16 @@ class CellTest < Minitest::Test
 
     assert_equal 'H', cell.status
   end
+
+  def test_knows_when_shot_was_a_miss_for_ten_or_greater
+    cell.shoot_at('A10')
+    assert_equal ' M', cell.status
+  end
+
+  def test_know_when_shot_is_a_hit_for_ten_or_greater
+    cell.place_ship(ship)
+    cell.shoot_at('A10')
+
+    assert_equal ' H', cell.status
+  end
 end
