@@ -70,7 +70,7 @@ class Game
 
       puts 'Pick a coordinate to shoot at: '
       coordinate = gets.chomp.upcase.strip
-      while invalid_format?(coordinate.split)
+      while cannot_shoot_there(coordinate, player_grid)
         puts "Invalid format, please choose again"
         coordinate = gets.chomp.upcase.strip
       end

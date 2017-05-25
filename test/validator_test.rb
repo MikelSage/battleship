@@ -80,4 +80,12 @@ class ValidatorTest < Minitest::Test
     assert validator.any_not_on_board?(['V1', 'A2'], grid)
     refute validator.any_not_on_board?(['A2', 'B2'], grid)
   end
+
+  def test_cannot_shoot_at_space_off_board
+    grid = Grid.new
+    grid.board_setup('D4')
+
+    assert validator.cannot_shoot_there('V1', grid)
+    refute validator.cannot_shoot_there('A2', grid)
+  end
 end

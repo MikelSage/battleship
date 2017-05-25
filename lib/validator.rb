@@ -52,6 +52,10 @@ module Validator
   end
 
   def invalid_format?(coords)
-    coords.any? { |coord| (/[A-Z]/.match(coord[0]).nil? || coord[1].to_i == 0) }
+    coords.any? {|coord| (/[A-Z]/.match(coord[0]).nil? || coord[1].to_i == 0)}
+  end
+
+  def cannot_shoot_there(coord, grid)
+    invalid_format?(coord.split) || any_not_on_board?(coord.split, grid)
   end
 end
