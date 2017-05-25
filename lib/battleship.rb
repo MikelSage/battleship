@@ -1,42 +1,49 @@
 require_relative 'game'
-puts 'Welcome to Battleship!'
+require_relative 'messages'
 
+include Messages
 game = Game.new
 
+puts welcome
+
 while true
-  puts 'Would you like to (p)lay, read the (i)nstructions, or (q)uit?'
+  puts opening_prompt
   answer = gets.chomp.downcase
 
   if answer == 'p'
     break
   elsif answer == 'i'
-    puts 'Here are the instructions.'
-    puts '=' * 10
+    puts divider
+    puts instructions
+    puts divider
   elsif answer == 'q'
-    puts 'Goodbye!'
+    puts divider
+    puts goodbye_message
+    puts divider
     exit 1
   else
-    puts 'Invalid selection'
-    puts '=' * 10
+    puts divider
+    puts invalid_selection
+    puts divider
   end
 end
 
 game.setup
 
 game.computer_place_ships
-puts 'I placed my ships. Do the same.'
-puts 'You have a 2 unit ship and a 3 unit ship.'
+
+puts computer_placed_ships
 
 game.player_place_ship
 
-puts 'Great, let us begin!'
+puts begin_message
 
 game.players_take_shots
 
 if game.winner.class == Player
-  puts 'You won!'
+  puts player_win_message
 else
-  puts "You lost... somehow."
+  puts computer_win_message
 end
 
 game.endgame_stats

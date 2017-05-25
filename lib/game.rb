@@ -70,12 +70,15 @@ class Game
 
       puts 'Pick a coordinate to shoot at: '
       coordinate = gets.chomp.upcase
+      while invalid_format?(coordinate.split)
+        puts "Invalid format, please choose again"
+        coordinate = gets.chomp.upcase
+      end
 
       player.shoot_at(coordinate)
       @shots_fired += 1
       computer.shoot_randomly(player_grid)
 
-      puts ''
       puts ''
       puts ''
     end
@@ -109,7 +112,7 @@ class Game
   end
 
   def endgame_stats
-    puts "You took #{time_taken} seconds."
+    puts "You took #{time_taken} seconds to vanquish your enemy."
     puts "Your logistics officer laments the use of #{shots_fired} shells to win."
   end
 
