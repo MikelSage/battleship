@@ -12,7 +12,11 @@ class Cell
   end
 
   def shoot_at(coord)
-    @occupied ? @status = 'H' : @status = 'M'
-    @ship.hit(coord) if @ship
+    if @ship
+      @status = 'H'
+      @ship.hit(coord)
+    else
+      @status = 'M'
+    end
   end
 end
