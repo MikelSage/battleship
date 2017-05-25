@@ -11,8 +11,8 @@ class Ship
     coordinates << coord
   end
 
-  def hit
-    @coordinates.shift
+  def hit(coord)
+    @coordinates.delete(coord)
   end
 
   def sunk?

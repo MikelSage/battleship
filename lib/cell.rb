@@ -11,8 +11,8 @@ class Cell
     @ship = ship
   end
 
-  def shoot_at
+  def shoot_at(coord)
     @occupied ? @status = 'H' : @status = 'M'
-    @ship.hit if @ship
+    @ship.hit(coord) if @ship
   end
 end

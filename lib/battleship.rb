@@ -1,12 +1,6 @@
-require_relative 'player'
-require_relative 'computer_player'
-require_relative 'grid'
-require_relative 'ship'
-require_relative 'validator'
 require_relative 'game'
 puts 'Welcome to Battleship!'
 
-include Validator
 game = Game.new
 
 while true
@@ -44,3 +38,5 @@ if game.winner.class == Player
 else
   puts "You lost... somehow."
 end
+
+game.endgame_stats

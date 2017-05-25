@@ -39,7 +39,7 @@ class Grid
   end
 
   def shoot_at(coord)
-    board[coord[0]][coord[1]].shoot_at
+    board[coord[0]][coord[1]].shoot_at(coord)
     occupied_cells.delete(coord)
   end
 

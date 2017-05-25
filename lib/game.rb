@@ -61,7 +61,7 @@ class Game
 
   def players_take_shots
     ships_sunk = {}
-    start_time = Time.now
+    @start_time = Time.now
     until (computer_grid.occupied_cells.length == 0 || player_grid.occupied_cells.length == 0)
       computer_grid.print_results
       puts ''
@@ -79,6 +79,7 @@ class Game
       puts ''
       puts ''
     end
+    ships_sunk_this_round(ships_sunk)
   end
 
   def ships_sunk_this_round(ships_sunk)
@@ -108,13 +109,13 @@ class Game
   end
 
   def endgame_stats
-    puts time_taken
-    puts shots_fired
+    puts "You took #{time_taken} seconds."
+    puts "Your logistics officer laments the use of #{shots_fired} shells to win."
   end
 
   def time_taken
     endgame_time = Time.now
-    endgame_time - time_taken
+    endgame_time - start_time
   end
 
   def shots_fired
