@@ -31,11 +31,9 @@ class ValidatorTest < Minitest::Test
 
   def test_it_knows_valid_coordinates
     frigate = Ship.new
-    destroyer = Ship.new
     grid = Grid.new
     grid.board_setup('D4')
     valid_frigate_coords = ['B2', 'C2']
-    valid_destroyer_coords = ['D1', 'D2', 'D3']
 
     refute validator.invalid_coordinates?(valid_frigate_coords, frigate, grid)
   end

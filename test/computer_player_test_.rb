@@ -39,7 +39,7 @@ class ComputerPlayerTest < Minitest::Test
     expected = ['frigate', 'destroyer']
     actual = cpu.ships.keys
 
-    assert_equal 5, cpu.lives
+    assert_equal 5, cpu.fleet_size
     assert_equal expected, actual
     assert_instance_of Ship, cpu.ships[actual.sample]
   end
@@ -51,7 +51,7 @@ class ComputerPlayerTest < Minitest::Test
     expected = ['frigate', 'destroyer', 'cruiser', 'carrier']
     actual = hard_cpu.ships.keys
 
-    assert_equal 14, hard_cpu.lives
+    assert_equal 14, hard_cpu.fleet_size
     assert_equal expected, actual
   end
 
@@ -184,8 +184,6 @@ class ComputerPlayerTest < Minitest::Test
   def test_shoots_randomly_at_uniq_spaces
     player_grid = Grid.new
     player_grid.board_setup('D4')
-
-    available_slots = player_grid.available_slots
 
     cpu.shoot_randomly(player_grid)
     cpu.shoot_randomly(player_grid)

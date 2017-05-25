@@ -64,7 +64,6 @@ class ComputerPlayer
 
   def place_vertical_ship(ship, available_cells, occupied_cells)
     head = generate_head_vertical(ship)
-    next_coord = nil
     potential_coords = [head]
     potential_vertical_coordinates(ship, potential_coords)
 
@@ -109,7 +108,6 @@ class ComputerPlayer
 
   def place_horizontal_ship(ship, available_cells, occupied_cells)
     head = generate_head_horizontal(ship)
-    next_coord = nil
     potential_coords = [head]
     potential_horizontal_coordinates(ship, potential_coords)
     if (potential_coords & occupied_cells).empty?

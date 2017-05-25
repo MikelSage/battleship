@@ -20,8 +20,8 @@ class Grid
   end
 
   def layout_board
-    board.map do |key, value|
-      value.map do |key, value|
+    board.map do |row, columns|
+      columns.map do |key, value|
         value.status
       end
     end
