@@ -39,4 +39,8 @@ puts 'Great, let us begin!'
 
 game.players_take_shots
 
-puts 'Somebody won!'
+if game.winner.class == Player
+  puts 'You won!'
+else
+  puts "You lost... somehow."
+end

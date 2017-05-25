@@ -34,15 +34,14 @@ class Game
         coords = gets.chomp.upcase.split
       end
 
-      # coords.each do |coord|
-      #   player_grid.place_ship_at(coord, ship)
-      # end
       player.place_ship(coords, ship)
     end
   end
 
   def coordinate_error(coords, ship, grid)
-    if coords.length < ship.size
+    if invalid_format?(coords)
+      "That's not a valid format, dude"
+    elsif coords.length < ship.size
       'The ship is longer, yo.'
     elsif coords.length > ship.size
       "That's too many coordinates, yo."
@@ -88,6 +87,14 @@ class Game
         puts "You sunk the enemy's #{ship_name}!"
         ships_sunk['enemy ' + ship_name] = ship
       end
+    end
+  end
+
+  def winner
+    if computer_grid.occupied_cells.empty?
+      player
+    else
+      computer
     end
   end
 end

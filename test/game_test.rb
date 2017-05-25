@@ -63,4 +63,12 @@ class GameTest < Minitest::Test
 
     assert (frigate_coords & destroyer_coords).empty?
   end
+
+  def test_can_tell_who_won
+    game.setup
+
+    game.computer_grid.occupied_cells.clear
+
+    assert_instance_of Player, game.winner
+  end
 end
