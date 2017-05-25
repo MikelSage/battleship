@@ -112,7 +112,7 @@ class Game
   end
 
   def endgame_stats
-    puts "You took #{time_taken} seconds to vanquish your enemy."
+    puts "You took #{time_taken} seconds to vanquish your ene."
     puts "Your logistics officer laments the use of #{shots_fired} shells to win."
   end
 
