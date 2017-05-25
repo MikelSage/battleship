@@ -72,4 +72,12 @@ class ValidatorTest < Minitest::Test
     assert validator.any_invalid_next_coordinate?(['B2', 'D2'])
     assert validator.any_invalid_next_coordinate?(['B2', 'B3', 'A2'])
   end
+
+  def test_if_knows_any_coordinates_not_on_board
+    grid = Grid.new
+    grid.board_setup('D4')
+    assert validator.any_not_on_board?(['V1', 'V2'], grid)
+    assert validator.any_not_on_board?(['V1', 'A2'], grid)
+    refute validator.any_not_on_board?(['A2', 'B2'], grid)
+  end
 end

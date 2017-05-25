@@ -1,3 +1,4 @@
+require 'pry'
 module Validator
   def within_one?(char1, char2)
     (char1.ord - char2.ord).abs == 1 unless char1.nil?
@@ -20,10 +21,16 @@ module Validator
 
   def invalid_coordinates?(coordinates, ship, grid)
     return true if invalid_format?(coordinates)
+    return true if any_not_on_board?(coordinates, grid)
     return true if coordinates.length != ship.size
     return true if any_occupied?(grid, coordinates)
     return true if any_invalid_next_coordinate?(coordinates)
     return false
+  end
+
+  def any_not_on_board?(coords, grid)
+    available_cells = grid.available_slots
+    coords.any? { |coord| !available_cells.include?(coord) }
   end
 
   def any_invalid_next_coordinate?(coordinates)

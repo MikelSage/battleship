@@ -44,13 +44,14 @@ class Game
   end
 
   def coordinate_error(coords, ship, grid)
-    available_cells = player_grid.available_slots
     if invalid_format?(coords)
       "That's not a valid format, dude"
     elsif coords.length < ship.size
       'The ship is longer, yo.'
     elsif coords.length > ship.size
       "That's too many coordinates, yo."
+    elsif any_not_on_board?(coords, grid)
+      "Those aren't on the board"
     elsif any_occupied?(grid, coords)
       "That space is already occupied."
     elsif invalid_coordinates?(coords, ship, player_grid)
