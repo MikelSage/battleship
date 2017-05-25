@@ -13,7 +13,7 @@ class Game
               :computer_grid,
               :start_time
 
-  def initialize(fleet_size)
+  def initialize(fleet_size=5)
     @player_grid = Grid.new
     @computer_grid = Grid.new
     @player = Player.new(player_grid, computer_grid, fleet_size)

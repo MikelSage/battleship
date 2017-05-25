@@ -23,6 +23,11 @@ module Validator
     return true if invalid_format?(coordinates)
     return true if coordinates.length != ship.size
     return true if any_occupied?(grid, coordinates)
+    return true if any_invalid_next_coordinate?(coordinates)
+    return false
+  end
+
+  def any_invalid_next_coordinate?(coordinates)
     ((coordinates.length) - 1).times do |time|
       coord = coordinates[time]
       next_coord = coordinates[time + 1]

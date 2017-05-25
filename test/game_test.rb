@@ -18,7 +18,7 @@ class GameTest < Minitest::Test
                 [' ', ' ', ' ', ' '],
                 [' ', ' ', ' ', ' ']]
 
-    game.setup
+    game.setup('D4')
 
     assert_instance_of Player, game.player
     assert_instance_of ComputerPlayer, game.computer
@@ -32,7 +32,7 @@ class GameTest < Minitest::Test
     occupied = ['A1', 'B1']
     invalid = ['A1', 'B2']
 
-    game.setup
+    game.setup('D4')
     ship = game.player.ships['frigate']
     grid = game.player_grid
     grid.place_ship_at('B1', ship)
@@ -45,7 +45,7 @@ class GameTest < Minitest::Test
 
   def test_player_can_place_ships
     skip
-    game.setup
+    game.setup('D4')
 
     game.player_place_ship
 
@@ -54,7 +54,7 @@ class GameTest < Minitest::Test
   end
 
   def test_computer_can_place_ships
-    game.setup
+    game.setup('D4')
 
     game.computer_place_ships
 
@@ -65,7 +65,7 @@ class GameTest < Minitest::Test
   end
 
   def test_can_tell_who_won
-    game.setup
+    game.setup('D4')
 
     game.computer_grid.occupied_cells.clear
 

@@ -66,4 +66,10 @@ class ValidatorTest < Minitest::Test
     refute validator.invalid_format?(valid_format)
     assert validator.invalid_format?(invalid_format)
   end
+
+  def test_it_knows_if_any_next_coordinates_invalid
+    assert validator.any_invalid_next_coordinate?(['A1', 'A4'])
+    assert validator.any_invalid_next_coordinate?(['B2', 'D2'])
+    assert validator.any_invalid_next_coordinate?(['B2', 'B3', 'A2'])
+  end
 end
