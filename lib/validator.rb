@@ -20,6 +20,7 @@ module Validator
   end
 
   def invalid_coordinates?(coordinates, ship, grid)
+    return true if invalid_format?(coordinates)
     return true if coordinates.length != ship.size
     ((coordinates.length) - 1).times do |time|
       coord = coordinates[time]
@@ -37,5 +38,9 @@ module Validator
 
   def any_occupied?(grid, coords)
     coords.any? { |coord| grid.space_occupied?(coord) }
+  end
+
+  def invalid_format?(coords)
+    coords.any? { |coord| (/[A-Z]/.match(coord[0]).nil? || coord[1].to_i == 0) }
   end
 end
