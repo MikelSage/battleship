@@ -11,8 +11,7 @@ class ComputerPlayer
               :foe_grid,
               :lives,
               :ships,
-              :shot_at,
-              :occupied_cells
+              :shot_at
 
   def initialize(own_grid, foe_grid, lives=5)
     @own_grid = own_grid
@@ -20,7 +19,6 @@ class ComputerPlayer
     @lives = lives
     @ships = self.set_ships(lives)
     @shot_at = []
-    @occupied_cells = []
   end
 
   def possible_ships

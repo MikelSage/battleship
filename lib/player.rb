@@ -1,11 +1,9 @@
-# needs to know ships x
-# needs to place ships
-# validate coordinates
-# needs to shoot at enemy
-
-
 class Player
-  attr_reader :own_grid, :foe_grid, :lives, :ships, :shot_at
+  attr_reader :own_grid,
+              :foe_grid,
+              :lives,
+              :ships,
+              :shot_at
 
   def initialize(own_grid, foe_grid, lives=5)
     @own_grid = own_grid
@@ -39,6 +37,7 @@ class Player
     coords.each do |coord|
       own_grid.place_ship_at(coord, ship)
       ship.coordinates << coord
+      occupied_cells << coord
     end
   end
 

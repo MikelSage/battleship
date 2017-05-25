@@ -79,7 +79,6 @@ class ComputerPlayerTest < Minitest::Test
     assert (destroyer_coords & cruiser_coords).empty?
     assert (destroyer_coords & carrier_coords).empty?
     assert (cruiser_coords & carrier_coords).empty?
-    binding.pry
   end
 
   def test_can_change_ship_orientation

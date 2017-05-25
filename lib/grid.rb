@@ -2,10 +2,12 @@ require "pry"
 require_relative "cell"
 
 class Grid
-  attr_reader :board
+  attr_reader :board,
+              :occupied_cells
 
   def initialize
     @board = {}
+    @occupied_cells = []
   end
 
   def board_setup(bottom_right)
@@ -33,6 +35,7 @@ class Grid
     return nil if space_occupied?(coord)
     space = board[coord[0]][coord[1..2]]
     space.place_ship(ship)
+    occupied_cells << coord
   end
 
   def shoot_at(coord)
