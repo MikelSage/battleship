@@ -1,4 +1,7 @@
+require_relative 'fleet_generator'
+
 class Player
+  include FleetGenerator
   attr_reader :own_grid,
               :foe_grid,
               :fleet_size,
@@ -11,26 +14,6 @@ class Player
     @fleet_size = fleet_size
     @ships = self.set_ships(fleet_size)
     @shot_at = []
-  end
-
-  def possible_ships
-    {
-      'frigate' => 2,
-      'destroyer' => 3,
-      'cruiser' => 4,
-      'carrier' => 5
-    }
-  end
-
-  def set_ships(fleet_size)
-    actual_ships = {}
-    possible_ships.each do |ship_name, size|
-      if size <= fleet_size
-        fleet_size -= size
-        actual_ships[ship_name] = Ship.new(size)
-      end
-    end
-    actual_ships
   end
 
   def place_ship(coords,ship)

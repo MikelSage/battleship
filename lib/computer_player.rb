@@ -1,12 +1,7 @@
-# needs to know about how many ships it has
-# needs to know about its own grid
-# needs to place ships
-# needs to shoot at random coordinates
-# creates ships as vertical/horizontal
-
-require_relative "ship"
+require_relative 'fleet_generator'
 
 class ComputerPlayer
+  include FleetGenerator
   attr_reader :own_grid,
               :foe_grid,
               :fleet_size,
@@ -21,28 +16,8 @@ class ComputerPlayer
     @shot_at = []
   end
 
-  def possible_ships
-    {
-      'frigate' => 2,
-      'destroyer' => 3,
-      'cruiser' => 4,
-      'carrier' => 5
-    }
-  end
-
   def open_cells
     own_grid.available_slots
-  end
-
-  def set_ships(fleet_size)
-    actual_ships = {}
-    possible_ships.each do |ship_name, size|
-      if size <= fleet_size
-        fleet_size -= size
-        actual_ships[ship_name] = Ship.new(size)
-      end
-    end
-    actual_ships
   end
 
   def place_ships
