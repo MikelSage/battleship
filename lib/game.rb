@@ -2,6 +2,7 @@ require_relative 'player'
 require_relative 'computer_player'
 require_relative 'grid'
 require_relative 'validator'
+require "pry"
 
 class Game
   include Validator
@@ -33,9 +34,10 @@ class Game
         coords = gets.chomp.upcase.split
       end
 
-      coords.each do |coord|
-        player_grid.place_ship_at(coord, ship)
-      end
+      # coords.each do |coord|
+      #   player_grid.place_ship_at(coord, ship)
+      # end
+      player.place_ship(coords, ship)
     end
   end
 
@@ -52,27 +54,40 @@ class Game
   end
 
   def players_take_shots
-    while (computer.lives > 0 || player.lives > 0)
+    ships_sunk = {}
+    until (computer_grid.occupied_cells.length == 0 || player_grid.occupied_cells.length == 0)
       computer_grid.print_results
       puts ''
       player_grid.print_results
+      ships_sunk_this_round(ships_sunk)
 
       puts 'Pick a coordinate to shoot at: '
       coordinate = gets.chomp.upcase
 
       player.shoot_at(coordinate)
       computer.shoot_randomly(player_grid)
-      ships_sunk_this_round
+
+      puts ''
+      puts ''
+      puts ''
     end
   end
 
-  def ships_sunk_this_round
+  def ships_sunk_this_round(ships_sunk)
     player.ships.each do |ship_name, ship|
-      puts "The computer sunk your #{ship_name}!" if ship.sunk?
+      next if ships_sunk.has_key?('your ' + ship_name)
+      if ship.sunk?
+        puts "The computer sunk your #{ship_name}!"
+        ships_sunk['your ' + ship_name] = ship
+      end
     end
 
     computer.ships.each do |ship_name, ship|
-      puts "You sunk the enemy's #{ship_name}!" if ship.sunk?
+      next if ships_sunk.has_key?('enemy ' + ship_name)
+      if ship.sunk?
+        puts "You sunk the enemy's #{ship_name}!"
+        ships_sunk['enemy ' + ship_name] = ship
+      end
     end
   end
 end

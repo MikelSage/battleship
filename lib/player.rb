@@ -37,7 +37,6 @@ class Player
     coords.each do |coord|
       own_grid.place_ship_at(coord, ship)
       ship.coordinates << coord
-      occupied_cells << coord
     end
   end
 

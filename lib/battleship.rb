@@ -37,13 +37,6 @@ game.player_place_ship
 
 puts 'Great, let us begin!'
 
-while (cpu.lives > 0 || player.lives > 0)
-  cpu_grid.print_results
-  player_grid.print_results
+game.players_take_shots
 
-  puts 'Pick a coordinate to shoot at: '
-  coordinate = gets.chomp.upcase
-
-  player.shoot_at(coordinate)
-  cpu.shoot_randomly(player_grid)
-end
+puts 'Somebody won!'

@@ -40,6 +40,7 @@ class Grid
 
   def shoot_at(coord)
     board[coord[0]][coord[1]].shoot_at
+    occupied_cells.delete(coord)
   end
 
   def available_slots
